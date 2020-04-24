@@ -18,7 +18,7 @@ export default function InputFields(props: Props) {
 
   return (
     <div className="my-4">
-      <Label>Input Fields</Label>
+      <Label>Arguments</Label>
       <div className="mt-2 grid md:grid-cols-2 gap-6">
         {props.inputFields.map(inputField => {
           return (

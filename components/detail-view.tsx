@@ -4,6 +4,7 @@ import { SchemaMap } from '../utils/schema';
 import { SelectedValue } from '../pages/index';
 import Heading from './heading';
 import FieldDetails from './field-details';
+import TypeDetails from './type-details';
 
 export type Props = {
   schema: SchemaMap;
@@ -21,6 +22,10 @@ export default function DetailView(props: Props) {
     let field = schema.types[typeRoot].fields[selectedValue.field];
 
     details = <FieldDetails field={field} />;
+  } else {
+    let type = schema.types[selectedValue.field];
+
+    details = <TypeDetails type={type} />;
   }
 
   return (

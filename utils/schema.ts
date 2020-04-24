@@ -164,19 +164,21 @@ export type SchemaField = {
   inputFields: Array<SchemaInputField>;
 };
 
+export type SchemaMapType = {
+  name: string;
+  kind: string;
+  description: string | null;
+  enumValues: { [key: string]: RawEnumValue };
+  inputFields: { [key: string]: SchemaInputField };
+  fields: { [key: string]: SchemaField };
+}
+
 export type SchemaMap = {
   queries: string;
   mutations: string;
   subscriptions: string | null;
   types: {
-    [key: string]: {
-      name: string;
-      kind: string;
-      description: string | null;
-      enumValues: { [key: string]: RawEnumValue };
-      inputFields: { [key: string]: SchemaInputField };
-      fields: { [key: string]: SchemaField };
-    };
+    [key: string]: SchemaMapType;
   };
 };
 
