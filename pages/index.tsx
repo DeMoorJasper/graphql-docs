@@ -38,9 +38,11 @@ const Page = (props: Props) => {
   }
 };
 
-export const getServerSideProps: GetServerSideProps = async context => {
-  let endpoint: string | null =
-    context.query.endpoint && !Array.isArray(context.query.endpoint) ? context.query.endpoint : null;
+export const getServerSideProps: GetServerSideProps = async ({ query, res }) => {
+  // Let the Zeit CDN cache this for an hour
+  res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate');
+
+  let endpoint: string | null = query.endpoint && !Array.isArray(query.endpoint) ? query.endpoint : null;
   if (!endpoint) {
     return {
       props: {
@@ -52,8 +54,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
   } else {
     let schema = await fetchGraphQLSchema(endpoint);
     let selectedValue = {
-      type: context.query.type || 'queries',
-      field: context.query.field || Object.keys(schema.types[schema.queries].fields)[0]
+      type: query.type || 'queries',
+      field: query.field || Object.keys(schema.types[schema.queries].fields)[0]
     };
 
     return {

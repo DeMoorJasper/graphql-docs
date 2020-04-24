@@ -1,4 +1,5 @@
 import { request } from 'graphql-request';
+import LRUCache from 'lru-cache';
 
 const schemaQuery = `
 query IntrospectionQuery {
@@ -275,7 +276,19 @@ function createSchemaMap(rawSchema: RawSchema): SchemaMap {
   };
 }
 
+const schemaCache = new LRUCache<string, SchemaMap>({
+  max: 100,
+  maxAge: 1000 * 60 * 60
+});
+
 export async function fetchGraphQLSchema(endpoint: string): Promise<SchemaMap> {
+  if (schemaCache.has(endpoint)) {
+    // @ts-ignore
+    return schemaCache.get(endpoint);
+  }
+
   let data = await request(endpoint, schemaQuery);
-  return createSchemaMap(data);
+  let schema = createSchemaMap(data);
+  schemaCache.set(endpoint, schema);
+  return schema;
 }
