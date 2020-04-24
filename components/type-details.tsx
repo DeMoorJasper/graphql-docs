@@ -16,7 +16,7 @@ export default function FieldDetails(props: Props) {
   return (
     <div>
       <Property label="Name" value={type.name} />
-      <Property label="Kind" value={type.kind} />
+      <Property label="Kind" value={<span className="capitalize">{type.kind.replace(/_/g, ' ').toLowerCase()}</span>} />
       <Property label="Description" value={type.description} />
       <Fields fields={Object.values(type.fields)} />
       <InputFields inputFields={Object.values(type.inputFields)} />
