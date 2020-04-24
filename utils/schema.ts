@@ -87,7 +87,7 @@ export type RawTypeRefType = {
 };
 
 export type RawInputValueType = {
-  name: string | null;
+  name: string;
   description: string | null;
   type: RawTypeRefType;
   defaultValue: string;
@@ -160,7 +160,7 @@ export type SchemaField = {
   defaultValue: string | null;
   isDeprecated: boolean;
   deprecationReason: string | null;
-  args: Array<SchemaInputField>;
+  inputFields: Array<SchemaInputField>;
 };
 
 export type SchemaMap = {
@@ -172,9 +172,9 @@ export type SchemaMap = {
       name: string;
       kind: string;
       description: string | null;
-      enumValues: Array<RawEnumValue>;
-      inputFields: Array<SchemaInputField>;
-      fields: Array<SchemaField>;
+      enumValues: { [key: string]: RawEnumValue };
+      inputFields: { [key: string]: SchemaInputField };
+      fields: { [key: string]: SchemaField };
     };
   };
 };
@@ -232,20 +232,38 @@ function createSchemaMap(rawSchema: RawSchema): SchemaMap {
       name: type.name,
       kind: type.kind,
       description: type.description,
-      enumValues: type.enumValues || [],
+      enumValues: type.enumValues
+        ? type.enumValues.reduce((acc, curr) => {
+            // @ts-ignore
+            acc[curr.name] = curr;
+            return acc;
+          }, {})
+        : {},
       fields: type.fields
-        ? type.fields.map(field => {
-            return {
-              name: field.name,
-              type: getRootType(field.type),
-              description: field.description,
-              isDeprecated: field.isDeprecated,
-              deprecationReason: field.deprecationReason,
-              args: field.args ? field.args.map(mapInputValues) : []
-            };
-          })
-        : [],
-      inputFields: type.inputFields ? type.inputFields.map(mapInputValues) : []
+        ? type.fields
+            .map(field => {
+              return {
+                name: field.name,
+                type: getRootType(field.type),
+                description: field.description,
+                isDeprecated: field.isDeprecated,
+                deprecationReason: field.deprecationReason,
+                inputFields: field.args ? field.args.map(mapInputValues) : []
+              };
+            })
+            .reduce((acc, curr) => {
+              // @ts-ignore
+              acc[curr.name] = curr;
+              return acc;
+            }, {})
+        : {},
+      inputFields: type.inputFields
+        ? type.inputFields.map(mapInputValues).reduce((acc, curr) => {
+            // @ts-ignore
+            acc[curr.name] = curr;
+            return acc;
+          }, {})
+        : {}
     };
   }
 
