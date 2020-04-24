@@ -1,0 +1,11 @@
+/* purgecss start ignore */
+@tailwind base;
+/* purgecss end ignore */
+@tailwind components;
+@tailwind utilities;
+
+.sr-hide {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}

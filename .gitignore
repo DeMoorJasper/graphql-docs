@@ -1,0 +1,14 @@
+# Mac files
+.DS_Store
+
+# package directories
+node_modules
+
+# Parcel build artifacts
+.cache
+dist
+
+*.log
+lib
+.next
+.now

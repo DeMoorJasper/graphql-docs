@@ -1,0 +1,48 @@
+{
+  "name": "nextjs-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "scripts": {
+    "format": "prettier --write \"./**/*.{ts,tsx,js,jsx,json,md,mdx,css,scss}\"",
+    "lint": "eslint \"./**/*.{ts,tsx,js,jsx}\" --fix",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.1.0",
+    "@types/classnames": "^2.2.9",
+    "@types/cookie": "^0.3.3",
+    "@types/node": "^13.13.2",
+    "@types/react": "^16.9.13",
+    "@zeit/next-source-maps": "^0.0.3",
+    "autoprefixer": "^9.6.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-react-app": "^5.2.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.13.0",
+    "eslint-plugin-react-hooks": "^1.6.0",
+    "husky": "^4.0.10",
+    "next-svgr": "^0.0.2",
+    "now": "^17.0.4",
+    "prettier": "^1.18.2",
+    "tailwindcss": "^1.1.4",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "@sentry/browser": "^5.6.2",
+    "@sentry/integrations": "^5.6.1",
+    "@sentry/node": "^5.6.2",
+    "classnames": "^2.2.6",
+    "cookie": "^0.4.1",
+    "next": "^9.3.5",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  }
+}

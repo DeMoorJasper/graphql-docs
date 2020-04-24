@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "name": "GraphQL Docs",
+  "regions": ["bru"],
+  "builds": [{ "src": "next.config.js", "use": "@now/next" }]
+}
