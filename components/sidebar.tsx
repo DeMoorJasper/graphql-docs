@@ -30,7 +30,11 @@ export default function SideBar(props: Props) {
           return [];
         }
       default:
-        return getKeys(schema.types);
+        return getKeys(schema.types).filter(k => {
+          return (
+            !!k && !k.startsWith('__') && k !== schema.queries && k !== schema.mutations && k !== schema.subscriptions
+          );
+        });
     }
   }, [selectedTab]);
 
