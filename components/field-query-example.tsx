@@ -37,7 +37,7 @@ export default function FieldQueryExample(props: Props) {
           {Object.values(typeValue.fields).map(f => {
             return (
               <div className="ml-4">
-                {f.name}: <FragmentLink field={f.name || ''}>{f.type.label}</FragmentLink>
+                {f.name}: <FragmentLink field={f.type.name || ''}>{f.type.label}</FragmentLink>
               </div>
             );
           })}
