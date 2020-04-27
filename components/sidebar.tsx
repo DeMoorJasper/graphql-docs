@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import { SchemaMap } from '../utils/schema';
 import Label from './label';
-import FragmentLink from './FragmentLink';
+import FragmentLink from './fragment-link';
 
 export type Props = {
   schema: SchemaMap;

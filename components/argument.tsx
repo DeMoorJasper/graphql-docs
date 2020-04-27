@@ -2,7 +2,7 @@ import React from 'react';
 
 import { SchemaInputField } from '../utils/schema';
 import Property from './property';
-import FragmentLink from './FragmentLink';
+import FragmentLink from './fragment-link';
 
 export type Props = {
   inputField: SchemaInputField;

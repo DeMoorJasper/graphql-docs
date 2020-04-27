@@ -145,6 +145,7 @@ export type SchemaType = {
 export type SchemaValueType = {
   name: string | null;
   label: string;
+  kind: string;
 };
 
 export type SchemaInputField = {
@@ -171,7 +172,7 @@ export type SchemaMapType = {
   enumValues: { [key: string]: RawEnumValue };
   inputFields: { [key: string]: SchemaInputField };
   fields: { [key: string]: SchemaField };
-}
+};
 
 export type SchemaMap = {
   queries: string;
@@ -203,15 +204,20 @@ function createTypeLabel(type: RawTypeRefType | null): string {
 
 function getRootType(type: RawTypeRefType) {
   let name = null;
-  let currentType: RawTypeRefType | null = type;
+  let currentType: RawTypeRefType = type;
 
-  while (name == null && currentType != null) {
+  while (name == null) {
     name = currentType.name;
-    currentType = currentType.ofType;
+    if (!!currentType.ofType) {
+      currentType = currentType.ofType;
+    } else {
+      break;
+    }
   }
 
   return {
     name,
+    kind: currentType.kind,
     label: createTypeLabel(type)
   };
 }

@@ -1,9 +1,7 @@
 import React from 'react';
 
 import { SchemaField } from '../utils/schema';
-import FieldDetails from './field-details';
-import SubHeading from './sub-heading';
-import FragmentLink from './FragmentLink';
+import FragmentLink from './fragment-link';
 import Label from './label';
 
 export type Props = {

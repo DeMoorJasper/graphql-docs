@@ -1,17 +1,19 @@
 import React from 'react';
 
-import { SchemaField } from '../utils/schema';
+import { SchemaField, SchemaMap } from '../utils/schema';
 import Property from './property';
 import Arguments from './arguments';
-import FragmentLink from './FragmentLink';
+import FragmentLink from './fragment-link';
+import FieldQueryExample from './field-query-example';
 
 export type Props = {
   field: SchemaField;
+  schema: SchemaMap;
   showExample?: boolean;
 };
 
 export default function FieldDetails(props: Props) {
-  let { field, showExample = false } = props;
+  let { field, schema, showExample = false } = props;
 
   return (
     <div>
@@ -26,6 +28,7 @@ export default function FieldDetails(props: Props) {
         {field.isDeprecated && <Property label="Deprecated" value={field.deprecationReason || 'Deprecated'} />}
       </div>
       <Arguments inputFields={field.inputFields} />
+      {showExample && <FieldQueryExample field={field} schema={schema} />}
     </div>
   );
 }

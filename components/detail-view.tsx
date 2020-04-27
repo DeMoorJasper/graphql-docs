@@ -21,7 +21,7 @@ export default function DetailView(props: Props) {
     // @ts-ignore
     let field = schema.types[typeRoot].fields[selectedValue.field];
 
-    details = <FieldDetails field={field} />;
+    details = <FieldDetails field={field} schema={schema} showExample />;
   } else {
     let type = schema.types[selectedValue.field];
 
