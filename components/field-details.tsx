@@ -2,15 +2,16 @@ import React from 'react';
 
 import { SchemaField } from '../utils/schema';
 import Property from './property';
-import InputFields from './input-fields';
+import Arguments from './arguments';
 import FragmentLink from './FragmentLink';
 
 export type Props = {
   field: SchemaField;
+  showExample?: boolean;
 };
 
 export default function FieldDetails(props: Props) {
-  let { field } = props;
+  let { field, showExample = false } = props;
 
   return (
     <div>
@@ -24,7 +25,7 @@ export default function FieldDetails(props: Props) {
         <Property label="Description" value={field.description} />
         {field.isDeprecated && <Property label="Deprecated" value={field.deprecationReason || 'Deprecated'} />}
       </div>
-      <InputFields inputFields={field.inputFields} />
+      <Arguments inputFields={field.inputFields} />
     </div>
   );
 }

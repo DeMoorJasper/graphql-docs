@@ -2,14 +2,14 @@ import React from 'react';
 
 import { SchemaInputField } from '../utils/schema';
 import Label from './label';
-import InputField from './input-field';
+import Argument from './argument';
 import Card from './card';
 
 export type Props = {
   inputFields: Array<SchemaInputField>;
 };
 
-export default function InputFields(props: Props) {
+export default function Arguments(props: Props) {
   let { inputFields } = props;
 
   if (!inputFields.length) {
@@ -23,7 +23,7 @@ export default function InputFields(props: Props) {
         {props.inputFields.map(inputField => {
           return (
             <Card>
-              <InputField inputField={inputField} />
+              <Argument inputField={inputField} />
             </Card>
           );
         })}

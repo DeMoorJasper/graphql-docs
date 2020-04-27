@@ -1,29 +1,27 @@
 import React from 'react';
 
-import { SchemaField } from '../utils/schema';
-import FieldDetails from './field-details';
-import SubHeading from './sub-heading';
-import FragmentLink from './FragmentLink';
+import { SchemaInputField } from '../utils/schema';
 import Label from './label';
+import FragmentLink from './FragmentLink';
 
 export type Props = {
-  fields: Array<SchemaField>;
+  inputFields: Array<SchemaInputField>;
 };
 
-export default function Fields(props: Props) {
-  let { fields } = props;
+export default function InputObject(props: Props) {
+  let { inputFields } = props;
 
-  if (!fields.length) {
+  if (!inputFields.length) {
     return null;
   }
 
   return (
     <div>
-      <Label>Properties</Label>
+      <Label>Input Format</Label>
       <div className="rounded bg-gray-200 px-4 py-2 overflow-x-auto">
         <div>
           <div>{'{'}</div>
-          {Object.values(fields).map(val => {
+          {inputFields.map(val => {
             return (
               <div className="ml-6">
                 {val.name}:{' '}
