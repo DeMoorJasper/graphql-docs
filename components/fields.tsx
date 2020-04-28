@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { SchemaField } from '../utils/schema';
-import FragmentLink from './fragment-link';
 import Label from './label';
+import FieldsObject from './fields-object';
 
 export type Props = {
   fields: Array<SchemaField>;
@@ -19,20 +19,7 @@ export default function Fields(props: Props) {
     <div>
       <Label>Properties</Label>
       <div className="rounded bg-gray-200 px-4 py-2 overflow-x-auto">
-        <div>
-          <div>{'{'}</div>
-          {Object.values(fields).map(val => {
-            return (
-              <div className="ml-6">
-                {val.name}:{' '}
-                <FragmentLink field={val.type.name || ''}>
-                  {val.type.label} {val.defaultValue ? ` = ${val.defaultValue}` : ''}
-                </FragmentLink>
-              </div>
-            );
-          })}
-          <div>{'}'}</div>
-        </div>
+        <FieldsObject fields={fields} />
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import React from 'react';
 import Label from './label';
 import { SchemaField, SchemaMap } from '../utils/schema';
 import FragmentLink from './fragment-link';
+import FieldsObject from './fields-object';
 
 export type Props = {
   field: SchemaField;
@@ -33,15 +34,8 @@ export default function FieldQueryExample(props: Props) {
       let typeValue = schema.types[field.type.name];
       returnValue = (
         <React.Fragment>
-          <span>{' {'}</span>
-          {Object.values(typeValue.fields).map(f => {
-            return (
-              <div className="ml-4">
-                {f.name}: <FragmentLink field={f.type.name || ''}>{f.type.label}</FragmentLink>
-              </div>
-            );
-          })}
-          <div>{'}'}</div>
+          <span> </span>
+          <FieldsObject fields={Object.values(typeValue.fields)} />
         </React.Fragment>
       );
     }
