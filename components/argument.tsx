@@ -14,6 +14,7 @@ export default function InputField(props: Props) {
   return (
     <div>
       <Property label="Name" value={inputField.name} />
+      <Property label="Description" value={inputField.description} />
       <Property
         label="Input Type"
         value={
