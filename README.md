@@ -1,3 +1,3 @@
-# NextJS Template
+# GraphQL Docs
 
-This template is used for creating NextJS applications using TailwindCSS and Sentry
+A GraphQL Documentation generation tool
