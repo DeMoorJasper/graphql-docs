@@ -23,7 +23,7 @@ export default function FieldsObject(props: Props) {
 
         return (
           <div className="ml-4">
-            {f.description && <div className="text-gray-600">// Description: {f.description}</div>}
+            {f.description && <div className="text-gray-600">// {f.description}</div>}
             {deprecationReason && <div className="text-orange-500 font-medium">// Deprecated: {deprecationReason}</div>}
             <div>
               {f.name}: <FragmentLink field={f.type.name || ''}>{f.type.label}</FragmentLink>
