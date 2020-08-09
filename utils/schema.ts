@@ -231,12 +231,27 @@ function mapInputValues(inputValue: RawInputValueType) {
   };
 }
 
+function filterInternals(value: any) {
+  if (value.name) {
+    return !value.name
+      .toLowerCase()
+      .trim()
+      .startsWith('internal');
+  }
+
+  return true;
+}
+
 function createSchemaMap(rawSchema: RawSchema): SchemaMap {
   let types: {
     [key: string]: any;
   } = {};
 
   for (let type of rawSchema.__schema.types) {
+    if (type.name.toLowerCase().startsWith('internal')) {
+      continue;
+    }
+
     types[type.name] = {
       name: type.name,
       kind: type.kind,
@@ -260,6 +275,7 @@ function createSchemaMap(rawSchema: RawSchema): SchemaMap {
                 inputFields: field.args ? field.args.map(mapInputValues) : []
               };
             })
+            .filter(filterInternals)
             .reduce((acc, curr) => {
               // @ts-ignore
               acc[curr.name] = curr;
@@ -267,11 +283,14 @@ function createSchemaMap(rawSchema: RawSchema): SchemaMap {
             }, {})
         : {},
       inputFields: type.inputFields
-        ? type.inputFields.map(mapInputValues).reduce((acc, curr) => {
-            // @ts-ignore
-            acc[curr.name] = curr;
-            return acc;
-          }, {})
+        ? type.inputFields
+            .map(mapInputValues)
+            .filter(filterInternals)
+            .reduce((acc, curr) => {
+              // @ts-ignore
+              acc[curr.name] = curr;
+              return acc;
+            }, {})
         : {}
     };
   }

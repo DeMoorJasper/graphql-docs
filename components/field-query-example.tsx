@@ -14,7 +14,7 @@ export default function FieldQueryExample(props: Props) {
   let { field, schema } = props;
 
   let queryArguments = null;
-  if (field.inputFields) {
+  if (field.inputFields && field.inputFields.length) {
     queryArguments = Object.values(field.inputFields).map((inputField, i) => {
       return (
         <span>
